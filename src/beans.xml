@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:annotation-config />
+	<!-- this configuration helps to structured a configuration in a lot files
+	<import resource="config/customer.xml"/> 
+	<import resource="config/scheduler.xml"/> 
+	-->
+	
+	<!-- // singleton prototype request session global-session -->
+	<bean id="helloWorld1" init-method="init" destroy-method="destroy"
+		scope="singleton" class="sv.edu.spring.xml.beans.HelloWorldXML">
+		<property name="message1" value="Hello World! " />
+		<property name="message2" value="This is the father " />
+		<property name="instance" value="1" />
+	</bean>
+
+	<bean id="beanTeamplate" abstract="true">
+		<property name="message1" value="Hello World!" />
+		<property name="message2" value="Hello Second World!" />
+		<property name="message3" value="Namaste India!" />
+	</bean>
+
+	<bean id="helloWorldSon1" init-method="init"
+		destroy-method="destroy" scope="singleton"
+		class="sv.edu.spring.xml.beans.HelloWorldXMLSon"
+		parent="beanTeamplate">
+		<property name="message1" value="Hello World! Son " />
+		<property name="message3" value="No yet I m the son " />
+	</bean>
+
+	<!-- <bean id = "helloWorld2" init-method="init" destroy-method ="destroy" 
+		scope="prototype" class = "sv.edu.spring.xml.beans.HelloWorldXML"> <property 
+		name = "message" value = "Hello World!"/> <property name = "instance" value 
+		= "2"/> </bean> -->
+
+
+	<bean id="textEditorXML"
+		class="sv.edu.spring.xml.beans.TextEditorXML">
+		<constructor-arg index="0" ref="spellCheckerES" />
+		<property name="sp" ref="spellCheckerUS" />
+	</bean>
+
+	<bean id="spellCheckerES"
+		class="sv.edu.spring.xml.beans.SpellCheckerES"></bean>
+
+	<bean id="spellCheckerUS"
+		class="sv.edu.spring.xml.beans.SpellCheckerUS"></bean>
+
+
+	<bean id="initHelloWorld"
+		class="sv.edu.spring.config.InitHelloWorld"></bean>
+
+
+	<!-- Definition for javaCollection -->
+	<bean id="javaCollectionXML"
+		class="sv.edu.spring.xml.beans.JavaCollectionXML">
+
+		<!-- results in a setAddressList(java.util.List) call -->
+		<property name="addressList">
+			<list>
+				<value>INDIA</value>
+				<value>Pakistan</value>
+				<value>USA</value>
+				<value>USA</value>
+			</list>
+		</property>
+
+		<!-- results in a setAddressSet(java.util.Set) call -->
+		<property name="addressSet">
+			<set>
+				<value>INDIA</value>
+				<value>Pakistan</value>
+				<value>USA</value>
+				<value>USA</value>
+			</set>
+		</property>
+
+		<!-- results in a setAddressMap(java.util.Map) call -->
+		<property name="addressMap">
+			<map>
+				<entry key="1" value="INDIA" />
+				<entry key="2" value="Pakistan" />
+				<entry key="3" value="USA" />
+				<entry key="4" value="USA" />
+			</map>
+		</property>
+
+		<!-- results in a setAddressProp(java.util.Properties) call -->
+		<property name="addressProp">
+			<props>
+				<prop key="one">INDIA</prop>
+				<prop key="one">INDIA</prop>
+				<prop key="two">Pakistan</prop>
+				<prop key="three">USA</prop>
+				<prop key="four">USA</prop>
+			</props>
+		</property>
+	</bean>
+
+<bean id = "cStartEventHandler" class = "sv.edu.spring.xml.beans.CStartEventHandlerXML"/>
+   <bean id = "cStopEventHandler" class = "sv.edu.spring.xml.beans.CStopEventHandlerXML"/>
+
+
+</beans>
